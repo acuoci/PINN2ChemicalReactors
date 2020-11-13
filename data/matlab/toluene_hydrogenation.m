@@ -5,7 +5,7 @@ clear variables;
 database_size = 1;
 
 % Number of exported points
-npoints = 201;
+npoints = 151;
 
 % Number of species/reactions
 ns = 3;

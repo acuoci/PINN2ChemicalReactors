@@ -2,10 +2,10 @@ close all;
 clear variables;
 
 % Size of database (1 to 3)
-database_size = 1;
+database_size = 3;
 
 % Number of exported points
-npoints = 201;
+npoints = 151;
 
 % Number of species/reactions
 ns = 5;
@@ -20,6 +20,7 @@ nu  = [ -1 -1 1 0 0; ...
 Cin = [0 6 0 0 0]';                 % inlet concentration (mol/l)
 V   = 1;                            % reactor volume (l)
 C0  = [0.30 0.14 0.08 0.01 0]';     % initial concentration (mol/l)
+C0  = [1.00 1.00 1.00 1.00 1.00]';  % initial concentration (mol/l)
 k   = [0.053 0.128 0.028 0.]';      % kinetic constants (mol,l,min)
 tf  = 20;                           % total residence time (min)
 

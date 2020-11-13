@@ -13,6 +13,9 @@ class pinn3d:
 
     def __init__(self, problem, X, u, layers, lb, ub, Ymin, Ymax, options, teta_guess, kappa_min, kappa_max,  weights, biases, from_scratch, reactor):
 
+	# Counter
+        self.count = 0
+        
         # Options
         self.problem = problem
         self.constrained = options['constrained']
@@ -84,13 +87,12 @@ class pinn3d:
         	teta_max = self.kappa_max
 
         # Options
-        options_LBFGSB = {	'maxiter': 50000,
-                            'maxfun': 50000,
-                            'maxcor': 50,
-                            'maxls': 50,
-                            'ftol' : 1.0 * np.finfo(float).eps,
-                            'gtol': 1.e-9
-                        }
+        options_LBFGSB = {  'maxiter': 100000,
+                            'maxfun': 100000,
+                            'maxcor': 100,
+                            'maxls': 100,
+                            'ftol' : 0.1 * np.finfo(float).eps
+                         }
 
         # Define the optimizer
         self.optimizer = tf.contrib.opt.ScipyOptimizerInterface(self.loss,
@@ -173,7 +175,10 @@ class pinn3d:
         elif self.constrained == 'None':
         	kappa = teta
 
-        print("Loss: ", loss, " kappa: ", kappa )
+        if self.count % 100 == 0:
+        	print("Loss: ", loss, " kappa: ", kappa)
+        
+        self.count = self.count + 1
 
 
     # Training function
